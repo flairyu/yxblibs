@@ -1,9 +1,21 @@
-# this lib used for checkout nat's type
-# the process is:
-# 
+#    CNAT is short for 'Check Nat', it uses STUN protocols to check what
+#    type of Nat your network is behind.
 #
+#    Copyright (C) 2012  Yu Xiangbo or YXB for short.  
+#                        Email: xiangbo_x@hotmail.com
+#	
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
 #
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
 import socket
@@ -145,7 +157,7 @@ def test2_fullclone(curaddr, sock, msgs):
 
 # test3: check is Symmetric NAT
 def test3_symmetric(curaddr, sock, msgs):
-	'''send binding requestion to two different address. if response address is not same, them it's Symmetric NAT.'''
+	'''send binding requestion to two different address. if response address is not same, then it's Symmetric NAT.'''
 	print 'test3_symmetric()'
 	sendData = struct.pack('!HH16s', 0x0001, 0, '1234567890123456')
 	print 'sendData:'+repr(sendData)
