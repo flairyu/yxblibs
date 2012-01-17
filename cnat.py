@@ -18,6 +18,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+
+
 import socket
 import struct
 
@@ -225,8 +227,6 @@ def test4_restricted(curaddr, sock, msgs):
 
 	return data, caddr
 
-
-
 # main function
 def main():
 
@@ -242,14 +242,6 @@ def main():
 	msgs = onResponse(data)
 	traceMsgs(msgs)
 
-	# test 3
-	tmsgs = test3_symmetric(curaddr, sock, msgs)
-	if tmsgs != None:
-		print '************** Symmetric NAT *********************'
-		exit(3)
-	else:
-		print '************* NOT Symmetric NAT*******************'
-
 	# test 2
 	data, caddr = test2_fullclone(curaddr, sock, msgs)
 	if data != None:
@@ -257,6 +249,14 @@ def main():
 		exit(2)
 	else:
 		print '************** NOT Full Clone ********************'
+
+	# test 3
+	tmsgs = test3_symmetric(curaddr, sock, msgs)
+	if tmsgs != None:
+		print '************** Symmetric NAT *********************'
+		exit(3)
+	else:
+		print '************* NOT Symmetric NAT*******************'
 
 	# test 4
 	data, caddr = test4_restricted(curaddr, sock, msgs)
@@ -267,6 +267,9 @@ def main():
 		print '************** Port Restricted NAT ***************'
 		exit(5)
 
+
+
 if __name__=='__main__':
 	main()
+
 
