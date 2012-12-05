@@ -142,17 +142,13 @@ def deleteItem(args):
 def listItem(args):
     global TODOLIST
     loadTodoList()
-    print "TODO LIST"
     print "------------------------------------------------------"
     i = 0
     for line in TODOLIST:
-        if line[0] == TodoStatus.UNDO:
-            print "%3d|%5s|%s"%(i,'UNDO',line)
-        elif line[0] == TodoStatus.DONE:
-            print "%3d|%5s|%s"%(i,'DONE',line)
+        print "%3d|%s"%(i,line)
         i += 1
     if i == 0:
-        print "None. use 'todo.py help' for help msg"
+        print "None. \nuse '%s help' for help msg"%args[0]
     print "------------------------------------------------------"
 
 # clear todo list

@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 #    CNAT is short for 'Check Nat', it uses STUN protocols to check what
 #    type of Nat your network is behind.
 #
@@ -17,7 +18,6 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-
 
 
 import socket
