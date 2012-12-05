@@ -35,7 +35,7 @@ usage: todo (a)dd|(d)one|del|(l)ist|(c)lear|(h)elp|? [args]
     done: done a item. [args] is the id.
     del: remove a item. [args] is the id(s)
     clear: clear the todo list.
-    list: list undo items. [args] can be 'all' or 'a', for show all item.
+    list: list undo items. [args] can be 'all','*','o'.. to filter item.
     help|?: show this doc.
 example:
     todo 'I have write a todo tools.'       #will add a item.
@@ -45,6 +45,7 @@ example:
     todo done 1:10 13 15                    #mark 1 to 10, 13 and 15 is done
     todo                                    #list todos.
     todo l a                                #list all
+    todo l o                                #list all done items
         ''' % VERSION
 
 # define file path
@@ -142,22 +143,25 @@ def deleteItem(args):
 # list todo things
 def listItem(args):
     global TODOLIST
+    if len(args) == 2:
+        print "miss args for 'list', see help"
+        return
     loadTodoList()
     print "------------------------------------------------------"
     i = 0
     printcount = 0
     for line in TODOLIST:
-        if len(args)>2 and ('a' in args[2]):
+        if len(args)>2 and (('a' in args[2]) or (line[0] in args[2])):
             print "%3d|%s"%(i,line)
             printcount += 1
-        elif line[0] == TodoStatus.UNDO:    
+        elif len(args)<2 and line[0] == TodoStatus.UNDO:    
             print "%3d|%s"%(i,line)
             printcount += 1
         i += 1
     if i == 0:
         print "None. \nuse '%s help' for help msg"%args[0]
-    if printcount == 0:
-        print "All Done.\nuse '%s list all'\nor '%s l a' for full list."%(args[0], args[0])
+    elif printcount == 0:
+        print "Nothing.\nuse '%s list all'\nor '%s l a' for full list."%(args[0], args[0])
     print "------------------------------------------------------"
 
 # clear todo list
