@@ -144,11 +144,19 @@ def listItem(args):
     loadTodoList()
     print "------------------------------------------------------"
     i = 0
+    printcount = 0
     for line in TODOLIST:
-        print "%3d|%s"%(i,line)
+        if len(args)>2 and ('a' in args[2]):
+            print "%3d|%s"%(i,line)
+            printcount += 1
+        elif line[0] == TodoStatus.UNDO:    
+            print "%3d|%s"%(i,line)
+            printcount += 1
         i += 1
     if i == 0:
         print "None. \nuse '%s help' for help msg"%args[0]
+    if printcount == 0:
+        print "All Done.\nuse '%s list all'\nor '%s l a' for full list."%(args[0], args[0])
     print "------------------------------------------------------"
 
 # clear todo list
