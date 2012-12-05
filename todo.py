@@ -30,20 +30,21 @@ HELPMSG = '''\
 todo is a little tool for create your todo-list.
 author: yxb
 version: %s
-usage: todo (a)dd|done|(d)el|(l)ist|(c)lear|(h)elp|? [args]
+usage: todo (a)dd|(d)one|del|(l)ist|(c)lear|(h)elp|? [args]
     add: add a todo item into list. [args] should be the msg what todo.
     done: done a item. [args] is the id.
-    del: remove a todo item. [args] is the id(s)
+    del: remove a item. [args] is the id(s)
     clear: clear the todo list.
-    list: list all todo items.
+    list: list undo items. [args] can be 'all' or 'a', for show all item.
     help|?: show this doc.
 example:
     todo 'I have write a todo tools.'       #will add a item.
     todo add 'another mission to be done.'  #also add a item.
     todo list                               #list todos.
-    todo del 1:10 13 15                     #delete 1 to 10, and 13,15 items.
-    todo done 1:10 13 15                    #mark 1 to 10, 13 and 15 is done.
+    todo del 1:10 13 15                     #delete 1 to 10, and 13,15 items
+    todo done 1:10 13 15                    #mark 1 to 10, 13 and 15 is done
     todo                                    #list todos.
+    todo l a                                #list all
         ''' % VERSION
 
 # define file path
