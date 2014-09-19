@@ -1,0 +1,8 @@
+#!/bin/sh
+rm *.tr
+rm *.txt
+rm *.unicharset
+rm *.shapetable
+rm *.pffmtable
+rm *.normproto
+rm *.inttemp

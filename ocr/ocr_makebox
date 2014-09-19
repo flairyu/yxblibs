@@ -1,0 +1,24 @@
+#!/bin/sh
+if [ $# -lt 2 ]; then
+	echo "usage:"
+	echo "ocr_makebox lang"
+fi
+
+lang=$1
+
+echo "lang is :$lang"
+echo ""
+echo "makeboxs..."
+for file in `ls *.tif`; 
+do
+	echo $file
+	trainfile=`echo $file|sed "s/\.tif//"`
+	echo "tesseract $file $trainfile -l $lang batch.nochop makebox"
+	tesseract $file $trainfile -l $lang batch.nochop makebox 
+	if [ $? -ne 0 ]; then
+		echo "generated tr file error."
+		exit 0
+	fi
+done
+echo "box files are generated."
+

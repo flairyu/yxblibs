@@ -1,0 +1,76 @@
+#!/bin/sh
+if [ $# -lt 1 ]; then
+	echo "usage:"
+	echo "train.sh lang"
+fi
+
+lang=$1
+op=$2
+
+if [ -n $op ]; then
+	goto $op
+fi
+
+echo "lang is :$lang"
+echo ""
+echo "training..."
+
+echo "[1/6]---------------------"
+echo "get tr files..."
+for file in `ls *.tif`; 
+do
+	echo $file
+	trainfile=`echo $file|sed "s/\.tif//"`
+	echo "tesseract $file $trainfile box.train"
+	tesseract $file $trainfile box.train
+	if [ $? -ne 0 ]; then
+		echo "generated tr file error."
+		exit 0
+	fi
+done
+echo "tr file is generated."
+
+echo "[2/6]---------------------"
+echo "get unicharset.."
+unicharset_extractor *.box
+if [ $? -ne 0 ]; then
+	echo "error."
+	exit 0
+fi
+echo "done."
+
+
+echo "[3/6]---------------------"
+echo "mftraing..."
+shapeclustering -F font_properties -U unicharset *.tr
+mftraining -F font_properties -U unicharset -O $lang.unicharset *.tr
+if [ $? -ne 0 ]; then
+	echo "error."
+	exit 0
+fi
+echo "done."
+
+echo "[4/6]---------------------"
+echo "cntraining..."
+cntraining *.tr
+if [ $? -ne 0 ]; then
+	echo "error."
+	exit 0
+fi
+echo "done."
+
+echo "[5/6]---------------------"
+echo "rename shapetable, normproto, inttemp, pffmtable"
+mv shapetable $lang.shapetable
+mv normproto $lang.normproto
+mv inttemp $lang.inttemp
+mv pffmtable $lang.pffmtable
+combine_tessdata $lang.
+echo "done."
+
+echo "[6/6]---------------------"
+echo "install to /opt/local/share/tessdata/"
+sudo cp $lang.traineddata /opt/local/share/tessdata/
+echo "done."
+echo "finished."
+echo "done"
