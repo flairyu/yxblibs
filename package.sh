@@ -11,4 +11,4 @@ echo $0
 echo $1
 
 #zip -r -9 $1.zip $1 -x *.svn* *.DS_Store* *.git*
-7za a -xr@/Users/yxb/bin/exfiles $1.7z $1
+7za a -xr!*.svn* -xr!*.git* -xr!*.DS_store* $1.7z $1
