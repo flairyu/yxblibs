@@ -1,0 +1,19 @@
+##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+127.0.0.1	localhost
+127.0.0.1	localtest
+255.255.255.255	broadcasthost
+::1             localhost 
+fe80::1%lo0	localhost
+
+
+#https://github.com/justjavac/ReplaceGoogleCDN
+#http://lug.ustc.edu.cn/
+#the ip of lug.ustc.edu.cn is 202.141.162.123
+202.141.162.123 ajax.googleapis.com
+202.141.162.123 fonts.googleapis.com
+202.141.162.123 themes.googleusercontent.com
